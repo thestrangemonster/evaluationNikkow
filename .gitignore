@@ -1,2 +1,42 @@
 # ignore env virtuel
+# ignore env virtuel
 .venv/
+
+# Base de données SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# Fichiers Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Variables d'environnement
+.env
+.env.local
+
+# Flask
+instance/
+.webassets-cache
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
