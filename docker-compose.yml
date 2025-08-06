@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  # Votre application Flask
+  flask-app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data  # Pour persister la base SQLite
+    environment:
+      - SQLALCHEMY_DATABASE_URI=sqlite:///data/bar_cocktails.db
+      - OLLAMA_URL=http://ollama:11434
+    depends_on:
+      - ollama
+    networks:
+      - cocktail-network
+
+  # Service Ollama
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    networks:
+      - cocktail-network
+
+volumes:
+  ollama-data:
+
+networks:
+  cocktail-network:
+    driver: bridge
