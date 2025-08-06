@@ -6,7 +6,30 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./instance:/app/instance  # ← Changé de 'data' vers 'instance'
+      - ./instance:/app/instance
     environment:
       - SQLALCHEMY_DATABASE_URI=sqlite:///instance/bar_cocktails.db
+      - OLLAMA_URL=http://ollama:11434
       - SECRET_KEY=your-secret-key-here
+    depends_on:
+      - ollama
+    networks:
+      - cocktail-network
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    networks:
+      - cocktail-network
+    # Laisser Ollama démarrer normalement
+    # Le modèle sera téléchargé à la première utilisation
+
+volumes:
+  ollama-data:
+
+networks:
+  cocktail-network:
+    driver: bridge

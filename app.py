@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from view.main import main_bp
 from view.cocktails import cocktails_bp
+from view.responses import responses_bp
 from models import db
 import os
 
@@ -20,6 +21,7 @@ db.init_app(app)
 # Enregistrement des Blueprints
 app.register_blueprint(main_bp)
 app.register_blueprint(cocktails_bp)
+app.register_blueprint(responses_bp)
 
 
 if __name__ == '__main__':
