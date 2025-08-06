@@ -7,3 +7,8 @@ main_bp = Blueprint('main', __name__)
 def index():
     cocktails = StockCocktails.query.all()
     return render_template('index.html', cocktails=cocktails)
+
+@main_bp.route('/cocktails')
+def cocktails():
+    cocktails = StockCocktails.query.all()
+    return render_template('cocktails.html', cocktails=cocktails)
