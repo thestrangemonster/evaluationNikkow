@@ -6,7 +6,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./data:/app/data
+      - ./instance:/app/instance  # ← Changé de 'data' vers 'instance'
     environment:
-      - SQLALCHEMY_DATABASE_URI=sqlite:///data/bar_cocktails.db
+      - SQLALCHEMY_DATABASE_URI=sqlite:///instance/bar_cocktails.db
       - SECRET_KEY=your-secret-key-here
