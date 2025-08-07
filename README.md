@@ -1,66 +1,86 @@
-# Read-me
+Le Mixologue Augmenté 🍹
+Un générateur de cocktails personnalisés utilisant l'intelligence artificielle avec Flask et Ollama.
 
-<center>Vous pouvez modifier ce fichier (cf. Brief)</center>
+Description
+Ce projet permet de créer des cocktails uniques en décrivant simplement ce que vous souhaitez. L'IA génère une recette complète avec les ingrédients, l'histoire du cocktail, l'ambiance musicale et une description pour l'image.
 
-## Comment gérer cette évaluation ?
+Technologies utilisées
+Flask : Framework web Python
+Jinja2 : Moteur de templates
+SQLite : Base de données
+Ollama : IA locale pour la génération de contenu
+Docker : Containerisation
+Bootstrap : Interface utilisateur
+Architecture
+Le projet utilise deux conteneurs Docker :
 
-1. Le rendu s'effectuera **uniquement** au travers de Github Classroom (clonez bien le repository créé par Github Classroom, et travaillez dedans. N'en recréez pas un nouveau). 
-2. Une Pull-Request est automatiquement générée par Github Classroom, **ne la fermez pas**. Elle me permettra de vous faire un feedback sous forme de code annoté. 
-3. Mettez-vous en condition d'une mise en situation professionnelle : le client (fictif, bien entendu) attend une app fonctionnelle qui répond au besoin énoncé, c'est tout :) 
-4. Lisez bien l'entièreté du brief avant de démarrer, n'hésitez pas à poser votre architecture sur papier (ou du moins à y réfléchir sur un support autre que l'IDE) avant de coder. 
+flask-app : Application web Flask
+ollama : Serveur IA Ollama avec le modèle llama3.2
+Installation et lancement
+Prérequis
+Docker
+Docker Compose
 
-➡️ [Cliquez ici pour lire le brief du client](BRIEF.md)
+Étapes
 
-docker-compose up --build flask-app
+1 ## Cloner le projet
+git clone <votre-repo>
+cd testNico
+2 ## Lancer l'application
+docker-compose up --build
+3 ## Accéder à l'application
+Interface web : http://localhost:5000
+API : http://localhost:5000/api/cocktails
 
-# Le Mixologue Augmenté
+## Utilisation
+Créer un cocktail : Décrivez votre cocktail idéal sur la page d'accueil
+Génération automatique : L'IA crée une recette unique
+Consultation : Retrouvez tous vos cocktails dans "Mes Cocktails"
+Suppression : Supprimez les cocktails que vous ne souhaitez plus garder
+## Structure du projet
+ testNico/
+├── view/
+│   ├── main.py          # Routes principales
+│   ├── cocktails.py     # Gestion des cocktails
+│   └── responses.py     # Génération IA
+├── templates/
+│   ├── base.html        # Template de base
+│   ├── home.html        # Page d'accueil
+│   └── cocktails.html   # Liste des cocktails
+├── models.py            # Modèles de base de données
+├── app.py               # Application principale
+├── docker-compose.yml   # Configuration des conteneurs
+└── requirements.txt     # Dépendances Python
 
-Application Flask pour générer des cocktails créatifs avec l'IA.
+## API
+GET /api/cocktails : Récupérer tous les cocktails
+POST /api/cocktails : Créer un nouveau cocktail
+DELETE /api/cocktails/<id> : Supprimer un cocktail
+GET /api/responses/test : Tester la connexion Ollama
 
-## Comment gérer cette évaluation ?
+## Configuration
+Les variables d'environnement sont configurées dans docker-compose.yml :
 
-1. Le rendu s'effectuera **uniquement** au travers de Github Classroom
-2. Une Pull-Request est automatiquement générée par Github Classroom, **ne la fermez pas**
-3. Mettez-vous en condition d'une mise en situation professionnelle
-4. Lisez bien l'entièreté du brief avant de démarrer
+SQLALCHEMY_DATABASE_URI : Chemin de la base de données
+OLLAMA_URL : URL du serveur Ollama
+SECRET_KEY : Clé secrète Flask
 
-➡️ [Cliquez ici pour lire le brief du client](BRIEF.md)
+## Notes techniques
+La base de données SQLite est créée automatiquement au premier lancement
+Le modèle Ollama llama3.2 est téléchargé automatiquement
+L'application fonctionne sans GPU (mode CPU)
 
-## Démarrage avec Docker
+## Dépannage
+Erreur 404 sur les styles : Normal, Bootstrap est chargé via CDN
+Génération lente : Premier appel plus long (téléchargement du modèle)
+Problème de connexion Ollama : Vérifier avec /api/responses/test
 
-```bash
-# Construire et démarrer l'application
-docker-compose up --build flask-app
+## Développement
+Pour développer en local sans Docker :
 
-# En arrière-plan
-docker-compose up -d --build flask-app
-
-# Voir les logs
-docker-compose logs -f flask-app
-
-# Arrêter le service
-docker-compose down
-```
-
-## Démarrage en développement local
-
-```bash
-# Activer l'environnement virtuel
-source .venv/bin/activate
-
-# Installer les dépendances
 pip install -r requirements.txt
-
-# Démarrer l'application
+export SQLALCHEMY_DATABASE_URI=sqlite:///bar_cocktails.db
 python app.py
-```
 
-## Accès
 
-- Application web : http://localhost:5000
-- API REST : http://localhost:5000/api/cocktails
-- Documentation : [Voir le brief](BRIEF.md)
-
-## Test de l'API avec Insomnia
-
-Voir les exemples dans [`testApiWithIsomnia.md`](testApiWithIsomnia.md)
+### Projet réalisé dans le cadre d'un apprentissage de Flask et Docker
