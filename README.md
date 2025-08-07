@@ -1,34 +1,29 @@
-Le Mixologue Augmenté 🍹
+# Le Mixologue Augmenté 🍹
+
 Un générateur de cocktails personnalisés utilisant l'intelligence artificielle avec Flask et Ollama.
 
-Description
+## Description
+
 Ce projet permet de créer des cocktails uniques en décrivant simplement ce que vous souhaitez. L'IA génère une recette complète avec les ingrédients, l'histoire du cocktail, l'ambiance musicale et une description pour l'image.
 
-Technologies utilisées
-Flask : Framework web Python
-Jinja2 : Moteur de templates
-SQLite : Base de données
-Ollama : IA locale pour la génération de contenu
-Docker : Containerisation
-Bootstrap : Interface utilisateur
-Architecture
-Le projet utilise deux conteneurs Docker :
+## Technologies utilisées
 
-flask-app : Application web Flask
-ollama : Serveur IA Ollama avec le modèle llama3.2
-Installation et lancement
-Prérequis
-Docker
-Docker Compose
+- **Flask** : Framework web Python
+- **Jinja2** : Moteur de templates
+- **SQLite** : Base de données
+- **Ollama** : IA locale pour la génération de contenu
+- **Docker** : Containerisation
+- **Bootstrap** : Interface utilisateur
 
-Étapes
 
-1 ## Cloner le projet
+## Étapes
+
+### 1  Cloner le projet
 git clone <votre-repo>
 cd testNico
-2 ## Lancer l'application
+### 2  Lancer l'application
 docker-compose up --build
-3 ## Accéder à l'application
+### 3 Accéder à l'application
 Interface web : http://localhost:5000
 API : http://localhost:5000/api/cocktails
 
@@ -54,11 +49,6 @@ testNico/
 ├── app.py               # Point d'entrée
 └── docker-compose.yml   # Configuration conteneurs
 ```
-
-### Justification :
-- **Modularité** : Séparation claire des responsabilités
-- **Maintenabilité** : Code organisé et lisible
-- **Évolutivité** : Ajout facile de nouvelles fonctionnalités
 
 ## API
 GET /api/cocktails : Récupérer tous les cocktails
@@ -117,20 +107,7 @@ pip install -r requirements.txt
 export SQLALCHEMY_DATABASE_URI=sqlite:///bar_cocktails.db
 python app.py
 
-## Conclusion
-
-### Métriques du projet :
-- **Temps de développement** : Optimisé grâce aux choix techniques
-- **Taille de l'application** : Minimaliste (~50 lignes de code métier)
-- **Temps de déploiement** : < 5 minutes avec Docker
-- **Ressources nécessaires** : 2GB RAM, architecture x86/ARM
-
-### Perspectives d'évolution :
-- **Interface mobile** : API prête pour développement app
-- **Multi-langues** : Prompts Ollama adaptables
-- **Génération d'images** : Intégration Stable Diffusion
-- **Export des recettes** : PDF/Print-friendly
 
 Cette architecture minimaliste répond parfaitement au besoin identifié tout en conservant des possibilités d'évolution futures.
 
-### Projet réalisé dans le cadre d'un apprentissage de Flask et Docker
+ *Projet réalisé dans le cadre d'un apprentissage de Flask et Docker*
