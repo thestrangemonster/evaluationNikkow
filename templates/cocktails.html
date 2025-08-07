@@ -7,7 +7,21 @@
 <div class="container mt-5">
     <h1 class="mb-4">Liste des Cocktails</h1>
 </div>
-
-
+{% if cocktails %}
+<div class="mt-5">
+    {% for cocktail in cocktails %}
+    <div class="mt-5">
+        <h2>{{ cocktail.cocktail_name }}</h2>
+        <p><strong>Ingrédients:</strong> {{ cocktail.ingredients }}</p>
+        <p><strong>Instructions:</strong> {{ cocktail.instructions }}</p>
+        <p><strong>Prompt:</strong> {{ cocktail.cocktail_prompt }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info" role="alert">
+    Aucun cocktail trouvé.
+</div>
+{% endif %}
 
 {% endblock %}

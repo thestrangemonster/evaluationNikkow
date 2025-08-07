@@ -3,6 +3,8 @@ from models import db, StockCocktails
 
 cocktails_bp = Blueprint('cocktails', __name__)
 
+
+# Route pour récupérer les cocktails (JSON)
 @cocktails_bp.route('/api/cocktails', methods=['GET'])
 def get_cocktails():
     cocktails = StockCocktails.query.all()
@@ -16,6 +18,7 @@ def get_cocktails():
         'cocktail_prompt': cocktail.cocktail_prompt
     } for cocktail in cocktails])
 
+# Ajouter un nouveau cocktail via l'API
 @cocktails_bp.route('/api/cocktails', methods=['POST'])
 def add_cocktail():
     data = request.get_json()
@@ -30,3 +33,13 @@ def add_cocktail():
     db.session.add(new_cocktail)
     db.session.commit()
     return jsonify({'message': 'Cocktail added successfully!'}), 201
+
+
+# Route pour afficher la page des cocktails (HTML  )
+@cocktails_bp.route('/cocktails', methods=['GET'])
+def show_cocktails():
+    cocktails = StockCocktails.query.all()
+    print(f"nb de cocktails: {len(cocktails)}")
+    for cocktail in cocktails:
+        print(f"Cocktail: {cocktail.name_created}")
+    return render_template('cocktails.html', cocktails=cocktails)
