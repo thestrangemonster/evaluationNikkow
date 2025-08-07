@@ -19,12 +19,12 @@ Ce projet permet de créer des cocktails uniques en décrivant simplement ce que
 ## Étapes
 
 ### 1  Cloner le projet
-**git clone <votre-repo>**
-**cd nomDuDossier**
+**git** clone nomDuRepo
+**cd** nomDuDossier
 ### 2  Lancer l'application
-**docker-compose up --build**
+docker-compose up --build
 ### 3 Accéder à l'application
-**Interface web**: http://localhost:5000
+**Interface web** : http://localhost:5000
 **API** : http://localhost:5000/api/cocktails
 
 ## Utilisation
