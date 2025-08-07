@@ -45,21 +45,19 @@ def show_cocktails():
     return render_template('cocktails.html', cocktails=cocktails)
 
 
-# Route pour supprimer un cocktail
-@cocktails_bp.route('/api/cocktails/<int:id>', methods=['DELETE']) 
+# Route pour supprimer via formulaire HTML
+@cocktails_bp.route('/cocktails/delete/<int:id>', methods=['POST'])
+def delete_cocktail_form(id):
+    """Supprimer un cocktail via formulaire HTML"""
+    cocktail = StockCocktails.query.get_or_404(id)
+    db.session.delete(cocktail)
+    db.session.commit()
+    return redirect(url_for('cocktails.show_cocktails'))
+
+# API pour supprimer un cocktail (JSON)
+@cocktails_bp.route('/api/cocktails/<int:id>', methods=['DELETE'])
 def delete_cocktail(id):
     cocktail = StockCocktails.query.get_or_404(id)
     db.session.delete(cocktail)
     db.session.commit()
     return jsonify({'message': 'Cocktail deleted successfully!'}), 200
-
-
-@cocktails_bp.route('/cocktails/<int:id>', methods=['POST'])
-def delete_cocktail_form(id):
-    """Supprimer un cocktail via formulaire HTML"""
-    cocktail = StockCocktails.query.get_or_404(id)
-    cocktail_name = cocktail.name_created
-    db.session.delete(cocktail)
-    db.session.commit()
-    flash(f'Cocktail "{cocktail_name}" supprimé avec succès !', 'success')
-    return redirect(url_for('cocktails.show_cocktails'))
