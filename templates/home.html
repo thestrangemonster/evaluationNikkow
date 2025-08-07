@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil - Le Mixologue Augmenté{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            
+            <!-- Messages d'erreur -->
+            {% if request.args.get('error') %}
+            <div class="alert alert-danger" role="alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                {{ request.args.get('error') }}
+            </div>
+            {% endif %}
+            
+            <!-- Hero Section -->
+            <div class="text-center mb-5">
+                <h1 class="display-4 mb-3">🍹 Le Mixologue Augmenté</h1>
+                <p class="lead">Créez des cocktails uniques grâce à l'intelligence artificielle</p>
+            </div>
+            
+            <!-- Formulaire de génération -->
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-magic"></i> Créer un Cocktail Personnalisé
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/generate">
+                        <div class="mb-3">
+                            <label for="prompt" class="form-label">
+                                <i class="fas fa-comment"></i> Décrivez le cocktail que vous souhaitez :
+                            </label>
+                            <textarea class="form-control" 
+                                     id="prompt" 
+                                     name="prompt" 
+                                     rows="4" 
+                                     placeholder="Exemple : Je veux un cocktail rafraîchissant avec du rhum et des fruits tropicaux..."
+                                     required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-cocktail"></i> Générer mon Cocktail
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Navigation rapide -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <a href="{{ url_for('cocktails.show_cocktails') }}" class="btn btn-outline-success w-100 mb-2">
+                        <i class="fas fa-list"></i> Voir mes Cocktails
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="/api/responses/test" class="btn btn-outline-info w-100 mb-2" target="_blank">
+                        <i class="fas fa-cog"></i> Tester Ollama
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

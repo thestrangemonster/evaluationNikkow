@@ -1,40 +1,93 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
-{% block title %}Cocktails{% endblock %}
+{% block title %}Mes Cocktails - Le Mixologue Augmenté{% endblock %}
 
 {% block content %}
 
 <div class="container mt-5">
-    <h1 class="mb-4">Liste des Cocktails</h1>
+    <h1 class="mb-4">
+        <i class="fas fa-cocktail"></i> Liste des Cocktails
+    </h1>
 </div>
 
 {% if cocktails %}
-<div class="mt-5">
+<div class="container mt-5">
     {% for cocktail in cocktails %}
-    <div class="mt-4 p-3 border rounded">
-        <h2>{{ cocktail.name_created }}</h2>  <!-- CORRIGÉ: name_created -->
-        <p><strong>Ingrédients:</strong> {{ cocktail.ingredients }}</p>
-        <p><strong>Histoire:</strong> {{ cocktail.story_describe }}</p>  <!-- CORRIGÉ: story_describe -->
-        <p><strong>Ambiance:</strong> {{ cocktail.sound_ambiance }}</p>  <!-- AJOUTÉ -->
-        <p><strong>Prompt Image:</strong> {{ cocktail.picture_prompt }}</p>  <!-- AJOUTÉ -->
-        <p><strong>Demande:</strong> {{ cocktail.cocktail_prompt }}</p>
-        <small class="text-muted">ID: {{ cocktail.id }}</small>
-        
-        <!-- Formulaire HTML pour la suppression -->
-        <form method="POST" action="/cocktails/delete/{{ cocktail.id }}" style="display: inline;">
-            <button type="submit" 
-                    class="btn btn-danger btn-sm" 
-                    onclick="return confirm('Supprimer le cocktail {{ cocktail.name_created }} ?')">
-                Supprimer
-            </button>
-        </form>
+    <div class="card mt-4 shadow-sm">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+                <div class="flex-grow-1">
+                    <h2 class="card-title text-primary">
+                        <i class="fas fa-glass-martini-alt"></i> {{ cocktail.name_created }}
+                    </h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong><i class="fas fa-list"></i> Ingrédients:</strong></p>
+                            <p class="text-muted">{{ cocktail.ingredients }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong><i class="fas fa-music"></i> Ambiance:</strong></p>
+                            <p class="text-muted">{{ cocktail.sound_ambiance }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <p><strong><i class="fas fa-book-open"></i> Histoire:</strong></p>
+                        <p class="text-muted">{{ cocktail.story_describe }}</p>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <p><strong><i class="fas fa-camera"></i> Description image:</strong></p>
+                        <p class="text-muted small">{{ cocktail.picture_prompt }}</p>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <p><strong><i class="fas fa-quote-left"></i> Demande originale:</strong></p>
+                        <p class="text-muted fst-italic">"{{ cocktail.cocktail_prompt }}"</p>
+                    </div>
+                    
+                    <small class="text-muted">
+                        <i class="fas fa-hashtag"></i> ID: {{ cocktail.id }}
+                    </small>
+                </div>
+                
+                <div class="ms-3">
+                    <!-- Formulaire HTML pour la suppression -->
+                    <form method="POST" action="/cocktails/delete/{{ cocktail.id }}" style="display: inline;">
+                        <button type="submit" 
+                                class="btn btn-danger btn-sm" 
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer le cocktail {{ cocktail.name_created }} ?')"
+                                title="Supprimer ce cocktail">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     {% endfor %}
 </div>
 {% else %}
-<div class="alert alert-info" role="alert">
-    Aucun cocktail trouvé.
+<div class="container mt-5">
+    <div class="alert alert-info text-center" role="alert">
+        <i class="fas fa-info-circle fa-2x mb-3"></i>
+        <h4>Aucun cocktail trouvé</h4>
+        <p>Vous n'avez pas encore créé de cocktails.</p>
+        <a href="{{ url_for('main.index') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Créer mon premier cocktail
+        </a>
+    </div>
 </div>
 {% endif %}
+
+<!-- Bouton retour à l'accueil -->
+<div class="container mt-5 mb-5">
+    <div class="text-center">
+        <a href="{{ url_for('main.index') }}" class="btn btn-outline-primary">
+            <i class="fas fa-arrow-left"></i> Retour à l'accueil
+        </a>
+    </div>
+</div>
 
 {% endblock %}
