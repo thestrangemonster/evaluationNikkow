@@ -7,14 +7,27 @@
 <div class="container mt-5">
     <h1 class="mb-4">Liste des Cocktails</h1>
 </div>
+
 {% if cocktails %}
 <div class="mt-5">
     {% for cocktail in cocktails %}
-    <div class="mt-5">
-        <h2>{{ cocktail.cocktail_name }}</h2>
+    <div class="mt-4 p-3 border rounded">
+        <h2>{{ cocktail.name_created }}</h2>  <!-- CORRIGÉ: name_created -->
         <p><strong>Ingrédients:</strong> {{ cocktail.ingredients }}</p>
-        <p><strong>Instructions:</strong> {{ cocktail.instructions }}</p>
-        <p><strong>Prompt:</strong> {{ cocktail.cocktail_prompt }}</p>
+        <p><strong>Histoire:</strong> {{ cocktail.story_describe }}</p>  <!-- CORRIGÉ: story_describe -->
+        <p><strong>Ambiance:</strong> {{ cocktail.sound_ambiance }}</p>  <!-- AJOUTÉ -->
+        <p><strong>Prompt Image:</strong> {{ cocktail.picture_prompt }}</p>  <!-- AJOUTÉ -->
+        <p><strong>Demande:</strong> {{ cocktail.cocktail_prompt }}</p>
+        <small class="text-muted">ID: {{ cocktail.id }}</small>
+        
+        <!-- Formulaire HTML pour la suppression -->
+        <form method="POST" action="/cocktails/delete/{{ cocktail.id }}" style="display: inline;">
+            <button type="submit" 
+                    class="btn btn-danger btn-sm" 
+                    onclick="return confirm('Supprimer le cocktail {{ cocktail.name_created }} ?')">
+                Supprimer
+            </button>
+        </form>
     </div>
     {% endfor %}
 </div>

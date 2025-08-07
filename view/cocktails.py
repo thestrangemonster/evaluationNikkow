@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, request
+from flask import Blueprint, render_template, jsonify, request, redirect, url_for, flash
 from models import db, StockCocktails
 
 cocktails_bp = Blueprint('cocktails', __name__)
@@ -43,3 +43,23 @@ def show_cocktails():
     for cocktail in cocktails:
         print(f"Cocktail: {cocktail.name_created}")
     return render_template('cocktails.html', cocktails=cocktails)
+
+
+# Route pour supprimer un cocktail
+@cocktails_bp.route('/api/cocktails/<int:id>', methods=['DELETE']) 
+def delete_cocktail(id):
+    cocktail = StockCocktails.query.get_or_404(id)
+    db.session.delete(cocktail)
+    db.session.commit()
+    return jsonify({'message': 'Cocktail deleted successfully!'}), 200
+
+
+@cocktails_bp.route('/cocktails/<int:id>', methods=['POST'])
+def delete_cocktail_form(id):
+    """Supprimer un cocktail via formulaire HTML"""
+    cocktail = StockCocktails.query.get_or_404(id)
+    cocktail_name = cocktail.name_created
+    db.session.delete(cocktail)
+    db.session.commit()
+    flash(f'Cocktail "{cocktail_name}" supprimé avec succès !', 'success')
+    return redirect(url_for('cocktails.show_cocktails'))

@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
   flask-app:
-    build: .
+    build:
+      context: .
+      dockerfile: dockerfile  # ← Pointer vers votre fichier en minuscules
     ports:
       - "5000:5000"
-    volumes:
-      - ./instance:/app/instance
     environment:
-      - SQLALCHEMY_DATABASE_URI=sqlite:///instance/bar_cocktails.db
+      - SQLALCHEMY_DATABASE_URI=sqlite:///bar_cocktails.db
       - OLLAMA_URL=http://ollama:11434
       - SECRET_KEY=your-secret-key-here
     depends_on:
@@ -24,8 +24,6 @@ services:
       - ollama-data:/root/.ollama
     networks:
       - cocktail-network
-    # Laisser Ollama démarrer normalement
-    # Le modèle sera téléchargé à la première utilisation
 
 volumes:
   ollama-data:
