@@ -51,10 +51,10 @@ testNico/
 ```
 
 ## API
-GET /api/cocktails : Récupérer tous les cocktails
-POST /api/cocktails : Créer un nouveau cocktail
-DELETE /api/cocktails/<id> : Supprimer un cocktail
-GET /api/responses/test : Tester la connexion Ollama
+**GET /api/cocktails** : Récupérer tous les cocktails
+**POST /api/cocktails** : Créer un nouveau cocktail
+**DELETE /api/cocktails/<id>** : Supprimer un cocktail
+**GET /api/responses/test** : Tester la connexion Ollama
 
 ## Workflow Applicatif
 
@@ -86,9 +86,9 @@ GET /api/responses/test : Tester la connexion Ollama
 ## Configuration
 Les variables d'environnement sont configurées dans docker-compose.yml :
 
-SQLALCHEMY_DATABASE_URI : Chemin de la base de données
-OLLAMA_URL : URL du serveur Ollama
-SECRET_KEY : Clé secrète Flask
+**SQLALCHEMY_DATABASE_URI** : Chemin de la base de données
+**OLLAMA_URL** : URL du serveur Ollama
+**SECRET_KEY** : Clé secrète Flask
 
 ## Notes techniques
 La base de données SQLite est créée automatiquement au premier lancement
@@ -101,7 +101,8 @@ Génération lente : Premier appel plus long (téléchargement du modèle)
 Problème de connexion Ollama : Vérifier avec /api/responses/test
 
 ## Développement
-Pour développer en local sans Docker :
+
+### Pour développer en local sans Docker :
 
 pip install -r requirements.txt
 export SQLALCHEMY_DATABASE_URI=sqlite:///bar_cocktails.db
