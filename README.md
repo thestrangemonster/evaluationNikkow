@@ -20,7 +20,7 @@ Ce projet permet de créer des cocktails uniques en décrivant simplement ce que
 
 ### 1  Cloner le projet
 git clone <votre-repo>
-cd testNico
+cd nomDuDossier
 ### 2  Lancer l'application
 docker-compose up --build
 ### 3 Accéder à l'application
