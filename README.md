@@ -33,10 +33,10 @@ Ce projet permet de créer des cocktails uniques en décrivant simplement ce que
 - **API** : http://localhost:5000/api/cocktails
 
 ## Utilisation
-Créer un cocktail : Décrivez votre cocktail idéal sur la page d'accueil
-Génération automatique : L'IA crée une recette unique
-Consultation : Retrouvez tous vos cocktails dans "Mes Cocktails"
-Suppression : Supprimez les cocktails que vous ne souhaitez plus garder
+- Créer un cocktail : Décrivez votre cocktail idéal sur la page d'accueil
+- Génération automatique : L'IA crée une recette unique
+- Consultation : Retrouvez tous vos cocktails dans "Mes Cocktails"
+- Suppression : Supprimez les cocktails que vous ne souhaitez plus garder
 
 
 ### Architecture des fichiers :
@@ -56,10 +56,10 @@ testNico/
 ```
 
 ## API
-**GET /api/cocktails** : Récupérer tous les cocktails
-**POST /api/cocktails** : Créer un nouveau cocktail
-**DELETE /api/cocktails/<id>** : Supprimer un cocktail
-**GET /api/responses/test** : Tester la connexion Ollama
+- **GET /api/cocktails** : Récupérer tous les cocktails
+- **POST /api/cocktails** : Créer un nouveau cocktail
+- **DELETE /api/cocktails/<id>** : Supprimer un cocktail
+- **GET /api/responses/test** : Tester la connexion Ollama
 
 ## Workflow Applicatif
 
@@ -87,31 +87,33 @@ testNico/
 ### Validation des données :
 - **Côté client** : Validation HTML5 (champs requis)
 - **Côté serveur** : Gestion d'erreurs et fallbacks
-- **Format IA** : Validation JSON stricte des réponses Ollama
+- **Format IA** : Validation JSON stricte des réponses Ollama 
+
 ## Configuration
+
 Les variables d'environnement sont configurées dans docker-compose.yml :
 
-**SQLALCHEMY_DATABASE_URI** : Chemin de la base de données
-**OLLAMA_URL** : URL du serveur Ollama
-**SECRET_KEY** : Clé secrète Flask
+- **SQLALCHEMY_DATABASE_URI** : Chemin de la base de données
+- **OLLAMA_URL** : URL du serveur Ollama
+- **SECRET_KEY** : Clé secrète Flask
 
 ## Notes techniques
-La base de données SQLite est créée automatiquement au premier lancement
-Le modèle Ollama llama3.2 est téléchargé automatiquement
-L'application fonctionne sans GPU (mode CPU)
+- La base de données SQLite est créée automatiquement au premier lancement
+- Le modèle Ollama llama3.2 est téléchargé automatiquement
+- L'application fonctionne sans GPU (mode CPU)
 
 ## Dépannage
-Erreur 404 sur les styles : Normal, Bootstrap est chargé via CDN
-Génération lente : Premier appel plus long (téléchargement du modèle)
-Problème de connexion Ollama : Vérifier avec /api/responses/test
+- Erreur 404 sur les styles : Normal, Bootstrap est chargé via CDN
+- Génération lente : Premier appel plus long (téléchargement du modèle)
+- Problème de connexion Ollama : Vérifier avec /api/responses/test
 
 ## Développement
 
 ### Pour développer en local sans Docker :
 
-pip install -r requirements.txt
-export SQLALCHEMY_DATABASE_URI=sqlite:///bar_cocktails.db
-python app.py
+- pip install -r requirements.txt
+- export SQLALCHEMY_DATABASE_URI=sqlite:///bar_cocktails.db
+- python app.py
 
 
 Cette architecture minimaliste répond parfaitement au besoin identifié tout en conservant des possibilités d'évolution futures.
