@@ -126,7 +126,7 @@ def generate_response():
 
 @responses_bp.route('/api/responses/test', methods=['GET'])
 def test_ollama_connection():
-    # ... votre code existant ...
+
     try:
         ollama_api_url = os.getenv('OLLAMA_URL', 'http://ollama:11434')
         response = requests.get(f'{ollama_api_url}/api/tags', timeout=10)
