@@ -59,9 +59,11 @@ J'ai choisi Flask pour sa simplicité et sa flexibilité :
 - Rapidité de développement : Mise en place rapide
 - Contrôle total : Choix des composants selon les besoins
 - Courbe d'apprentissage : Plus accessible que Django
-- Architecture Flask adoptée :
 
-Blueprints pour la modularité :
+### Architecture Flask adoptée :
+
+#### Blueprints pour la modularité :
+
 - main_bp : Routes principales (accueil)
 - cocktails_bp : Gestion des cocktails (CRUD)
 - responses_bp : Intégration IA
@@ -71,7 +73,8 @@ Blueprints pour la modularité :
 
 ### Choix de Jinja2
 
-Intégration native avec Flask
+#### Intégration native avec Flask
+
 - Héritage de templates : Template de base réutilisable
 - Syntaxe claire : {% extends %}, {% block %}
 - Sécurité : Échappement automatique des variables
@@ -87,7 +90,7 @@ Intégration native avec Flask
 
 ### Architecture des templates :
 
-```
+```bash
 base.html (structure + navigation)
 ├── home.html (formulaire de génération)
 └── cocktails.html (liste + suppression)
@@ -106,17 +109,17 @@ base.html (structure + navigation)
 
 ### Container Flask-App :
 
-- FROM python:3.11-slim
+##### FROM python:3.11-slim
 
-```
+```bash
 // Image légère pour réduire la taille
 ```
 
 ### Container Ollama :
 
-- image: ollama/ollama:latest
+##### image: ollama/ollama:latest
 
-```
+```bash
 // Image officielle, maintenance assurée
 ```
 
@@ -129,6 +132,7 @@ base.html (structure + navigation)
 ## 6. Intégration Intelligence Artificielle - Ollama
 
 ### Choix d'Ollama vs API externes
+
 #### Avantages d'Ollama :
 
 - Privacy : Pas de données envoyées à l'extérieur
@@ -144,6 +148,7 @@ base.html (structure + navigation)
 ## 7. Choix Techniques Complémentaires
 
 ### API REST + Interface Web
+
 - Flexibilité : Double interface (humaine + programmatique)
 - Future évolution : Possibilité d'ajouter une app mobile
 - Test et débogage : API facilite les tests
@@ -182,8 +187,10 @@ base.html (structure + navigation)
 
 ## Conclusion
 
+``
 Cette architecture minimaliste répond parfaitement au besoin identifié : une application simple, fiable et efficace pour la génération de cocktails en contexte professionnel. Les choix techniques privilégient la simplicité, la maintenabilité et la performance plutôt que la complexité technique.
 
 L'approche "Less is More" adoptée permet une mise en production rapide tout en conservant des possibilités d'évolution futures. La containerisation assure une portabilité maximale, tandis que l'IA locale garantit la confidentialité des données.
 
 Résultat : Une application fonctionnelle, déployable en quelques minutes, parfaitement adaptée à son contexte d'usage.
+``
