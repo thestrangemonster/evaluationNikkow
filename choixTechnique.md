@@ -187,10 +187,10 @@ base.html (structure + navigation)
 
 ## Conclusion
 
-``
+```vim
 Cette architecture minimaliste répond parfaitement au besoin identifié : une application simple, fiable et efficace pour la génération de cocktails en contexte professionnel. Les choix techniques privilégient la simplicité, la maintenabilité et la performance plutôt que la complexité technique.
 
 L'approche "Less is More" adoptée permet une mise en production rapide tout en conservant des possibilités d'évolution futures. La containerisation assure une portabilité maximale, tandis que l'IA locale garantit la confidentialité des données.
 
 Résultat : Une application fonctionnelle, déployable en quelques minutes, parfaitement adaptée à son contexte d'usage.
-``
+```
