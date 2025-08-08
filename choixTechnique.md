@@ -10,18 +10,18 @@ Ce projet consiste en une application web de génération de cocktails personnal
 
 ### Context d'Usage
 
-Utilisateur unique : Un barman dans son établissement
-Pas d'authentification nécessaire : Environnement de confiance (un seul bar)
-Simplicité d'usage : Interface intuitive pour une utilisation rapide
-Fiabilité : Application stable pour un usage professionnel
+- Utilisateur unique : Un barman dans son établissement
+- Pas d'authentification nécessaire : Environnement de confiance (un seul bar)
+- Simplicité d'usage : Interface intuitive pour une utilisation rapide
+- Fiabilité : Application stable pour un usage professionnel
 
 ## Architecture Choisie
 
 J'ai opté pour une architecture en microservices containerisée avec deux composants distincts :
 
-Conteneur Flask : Application web et API
-Conteneur Ollama : Serveur IA local
-Cette séparation permet une scalabilité et une maintenance facilitées, chaque service ayant sa responsabilité propre.
+- Conteneur Flask : Application web et API
+- Conteneur Ollama : Serveur IA local
+- Cette séparation permet une scalabilité et une maintenance facilitées, chaque service ayant sa responsabilité propre.
 
 ## 2. Choix de la Base de Données
 
@@ -29,11 +29,11 @@ Cette séparation permet une scalabilité et une maintenance facilitées, chaque
 
 ### Justification :
 
-Simplicité : Une seule entité métier (les cocktails)
-Pas de relations complexes : Aucun besoin de jointures
-Performance : Accès direct sans overhead relationnel
-Portabilité : Fichier unique, facile à sauvegarder/transférer
-Structure de la table StockCocktails :
+- Simplicité : Une seule entité métier (les cocktails)
+- Pas de relations complexes : Aucun besoin de jointures
+- Performance : Accès direct sans overhead relationnel
+- Portabilité : Fichier unique, facile à sauvegarder/transférer
+- Structure de la table StockCocktails :
 
 - id (Primary Key)
 - name_created (Nom du cocktail)
@@ -53,41 +53,43 @@ J'ai choisi Flask pour sa simplicité et sa flexibilité :
 
 ### Avantages :
 
-Légerté : Framework minimaliste, pas de fonctionnalités inutiles
-Rapidité de développement : Mise en place rapide
-Contrôle total : Choix des composants selon les besoins
-Courbe d'apprentissage : Plus accessible que Django
-Architecture Flask adoptée :
+- Légerté : Framework minimaliste, pas de fonctionnalités inutiles
+- Rapidité de développement : Mise en place rapide
+- Contrôle total : Choix des composants selon les besoins
+- Courbe d'apprentissage : Plus accessible que Django
+- Architecture Flask adoptée :
 
 Blueprints pour la modularité :
-main_bp : Routes principales (accueil)
-cocktails_bp : Gestion des cocktails (CRUD)
-responses_bp : Intégration IA
-Séparation des responsabilités : Models, Views, Templates
+- main_bp : Routes principales (accueil)
+- cocktails_bp : Gestion des cocktails (CRUD)
+- responses_bp : Intégration IA
+- Séparation des responsabilités : Models, Views, Templates
 
 ## 4. Interface Utilisateur - Jinja2 + Bootstrap
 
 ### Choix de Jinja2
 
 Intégration native avec Flask
-Héritage de templates : Template de base réutilisable
-Syntaxe claire : {% extends %}, {% block %}
-Sécurité : Échappement automatique des variables
+- Héritage de templates : Template de base réutilisable
+- Syntaxe claire : {% extends %}, {% block %}
+- Sécurité : Échappement automatique des variables
 
 ### Bootstrap 5
 
 ### Pourquoi Bootstrap :
 
-Rapidité de développement : Composants prêts à l'emploi
-Responsive Design : Adaptation mobile automatique
-Consistance visuelle : Design professionnel sans effort
-CDN : Pas de gestion de fichiers statiques
+- Rapidité de développement : Composants prêts à l'emploi
+- Responsive Design : Adaptation mobile automatique
+- Consistance visuelle : Design professionnel sans effort
+- CDN : Pas de gestion de fichiers statiques
 
 ### Architecture des templates :
 
+```
 base.html (structure + navigation)
 ├── home.html (formulaire de génération)
 └── cocktails.html (liste + suppression)
+```
 
 ## 5. Containerisation avec Docker
 
@@ -95,80 +97,86 @@ base.html (structure + navigation)
 
 ### Justification de la séparation :
 
-Isolation des services : Chaque conteneur a sa responsabilité
-Scalabilité : Possibilité d'ajuster les ressources indépendamment
-Maintenance : Mise à jour d'un service sans impacter l'autre
-Sécurité : Isolation des processus
+- Isolation des services : Chaque conteneur a sa responsabilité
+- Scalabilité : Possibilité d'ajuster les ressources indépendamment
+- Maintenance : Mise à jour d'un service sans impacter l'autre
+- Sécurité : Isolation des processus
 
 ### Container Flask-App :
 
-FROM python:3.11-slim
+- FROM python:3.11-slim
+
+```
 // Image légère pour réduire la taille
+```
 
 ### Container Ollama :
 
-image: ollama/ollama:latest
+- image: ollama/ollama:latest
+
+```
 // Image officielle, maintenance assurée
+```
 
 ### Communication inter-containers :
 
-Réseau Docker dédié : cocktail-network
-Variables d'environnement : Configuration flexible
-Service Discovery : Communication par nom de service
+- Réseau Docker dédié : cocktail-network
+- Variables d'environnement : Configuration flexible
+- Service Discovery : Communication par nom de service
 
 ## 6. Intégration Intelligence Artificielle - Ollama
 
-Choix d'Ollama vs API externes
-Avantages d'Ollama :
+### Choix d'Ollama vs API externes
+#### Avantages d'Ollama :
 
-Privacy : Pas de données envoyées à l'extérieur
-Coût : Pas de frais d'API
-Contrôle : Maîtrise totale du modèle
-Rapidité : Pas de latence réseau
-Modèle llama3.2 :
+- Privacy : Pas de données envoyées à l'extérieur
+- Coût : Pas de frais d'API
+- Contrôle : Maîtrise totale du modèle
+- Rapidité : Pas de latence réseau
+- Modèle llama3.2 :
 
-Performance : Bon compromis taille/qualité
-Format JSON : Réponses structurées
-Créativité : Adapté à la génération de contenu 
+- Performance : Bon compromis taille/qualité
+- Format JSON : Réponses structurées
+- Créativité : Adapté à la génération de contenu 
 
 ## 7. Choix Techniques Complémentaires
 
-API REST + Interface Web
-Flexibilité : Double interface (humaine + programmatique)
-Future évolution : Possibilité d'ajouter une app mobile
-Test et débogage : API facilite les tests
+### API REST + Interface Web
+- Flexibilité : Double interface (humaine + programmatique)
+- Future évolution : Possibilité d'ajouter une app mobile
+- Test et débogage : API facilite les tests
 
 ### Gestion des erreurs
 
-Redirections avec messages : UX fluide
-Logs applicatifs : Traçabilité pour le débogage
-Fallbacks : Valeurs par défaut en cas d'erreur IA
+- Redirections avec messages : UX fluide
+- Logs applicatifs : Traçabilité pour le débogage
+- Fallbacks : Valeurs par défaut en cas d'erreur IA
 
 ### Sécurité minimaliste
 
-Pas d'authentification : Adapté au contexte (environnement fermé)
-Validation des entrées : Protection contre les injections
-Échappement automatique : Jinja2 sécurise l'affichage
+- Pas d'authentification : Adapté au contexte (environnement fermé)
+- Validation des entrées : Protection contre les injections
+- Échappement automatique : Jinja2 sécurise l'affichage
 
 ## 8. Avantages de cette Architecture
 
 ### Simplicité et Maintenabilité
 
-Code lisible : Structure claire, séparation des responsabilités
-Déploiement simple : docker-compose up
-Configuration centralisée : Variables d'environnement
+- Code lisible : Structure claire, séparation des responsabilités
+- Déploiement simple : docker-compose up
+- Configuration centralisée : Variables d'environnement
 
 ### Performance
 
-Base de données légère : SQLite pour un usage monoposte
-Cache statique : Bootstrap via CDN
-IA locale : Pas de dépendance réseau
+- Base de données légère : SQLite pour un usage monoposte
+- Cache statique : Bootstrap via CDN
+- IA locale : Pas de dépendance réseau
 
 ### Évolutivité
 
-Architecture modulaire : Ajout de fonctionnalités facilité
-API disponible : Intégration avec d'autres systèmes
-Containerisation : Migration vers Kubernetes possible
+- Architecture modulaire : Ajout de fonctionnalités facilité
+- API disponible : Intégration avec d'autres systèmes
+- Containerisation : Migration vers Kubernetes possible
 
 ## Conclusion
 
