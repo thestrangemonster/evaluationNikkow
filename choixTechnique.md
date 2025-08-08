@@ -33,16 +33,18 @@ J'ai opté pour une architecture en microservices containerisée avec deux compo
 - Pas de relations complexes : Aucun besoin de jointures
 - Performance : Accès direct sans overhead relationnel
 - Portabilité : Fichier unique, facile à sauvegarder/transférer
-- Structure de la table StockCocktails :
 
-- id (Primary Key)
-- name_created (Nom du cocktail)
-- ingredients (Liste des ingrédients)
-- story_describe (Histoire du cocktail)
-- sound_ambiance (Ambiance musicale)
-- picture_prompt (Description pour génération d'image)
-- cocktail_prompt (Demande originale de l'utilisateur)
+#### Structure de la table StockCocktails :
 
+```bash
+ id (Primary Key)
+ name_created (Nom du cocktail)
+ ingredients (Liste des ingrédients)
+ story_describe (Histoire du cocktail)
+ sound_ambiance (Ambiance musicale)
+ picture_prompt (Description pour génération d'image)
+ cocktail_prompt (Demande originale de l'utilisateur)
+```
 Cette structure dénormalisée est volontaire : elle évite la complexité tout en conservant toutes les informations nécessaires.
 
 ## 3. Choix du Framework Web - Flask
