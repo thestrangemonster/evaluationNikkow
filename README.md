@@ -32,6 +32,7 @@ docker-compose up --build
 ```
 
 ⚠️ **Premier démarrage** : Le téléchargement du modèle llama3.2 (~2GB) peut prendre quelques minutes selon votre connexion.
+***bien attendre la fin du téléchargement avant d'accéder à l'app*** 
 
 ### 3. Accéder à l'application
 
