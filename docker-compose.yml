@@ -10,7 +10,7 @@ services:
     volumes:
       - ./instance:/app/instance  # Synchronise le dossier instance entre l'hôte et le conteneur
     environment:
-      - SQLALCHEMY_DATABASE_URI=sqlite:///instance/bar_cocktails.db
+      - SQLALCHEMY_DATABASE_URI=sqlite:////app/instance/bar_cocktails.db
       - OLLAMA_URL=http://ollama:11434
       - SECRET_KEY=your-secret-key-here
     depends_on:
@@ -26,6 +26,13 @@ services:
       - ollama-data:/root/.ollama
     networks:
       - cocktail-network
+    # Commande pour télécharger le modèle au démarrage
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      "ollama serve & 
+       sleep 10 && 
+       ollama pull llama3.2 && 
+       wait"
 
 volumes:
   ollama-data:

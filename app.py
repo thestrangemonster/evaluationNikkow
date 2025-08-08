@@ -25,6 +25,9 @@ app.register_blueprint(responses_bp)
 
 
 if __name__ == '__main__':
+    # Créer le dossier instance s'il n'existe pas
+    os.makedirs('instance', exist_ok=True)
+    
     with app.app_context():
         db.create_all()  # Crée les tables dans la base de données si elles n'existent pas
     # Démarrer l'application Flask  

@@ -18,19 +18,30 @@ Ce projet permet de créer des cocktails uniques en décrivant simplement ce que
 
 ## Étapes
 
-### 1  Cloner le projet
+### 1. Cloner le projet
 
-- **git** clone nomDuRepo
-- **cd** nomDuDossier
+```bash
+git clone https://github.com/thestrangemonster/evaluationNikkow.git
+cd evaluationNikkow
+```
 
-### 2  Lancer l'application
+### 2. Lancer l'application
 
-- docker-compose up --build
+```bash
+docker-compose up --build
+```
 
-### 3 Accéder à l'application
+⚠️ **Premier démarrage** : Le téléchargement du modèle llama3.2 (~2GB) peut prendre quelques minutes selon votre connexion.
+
+### 3. Accéder à l'application
 
 - **Interface web** : http://localhost:5000
 - **API** : http://localhost:5000/api/cocktails
+
+### 4. (Optionnel) Vérifier que tout fonctionne
+
+- Test de l'IA : http://localhost:5000/api/responses/test
+- Doit retourner `{"status": "Ollama is working!"}`
 
 ## Utilisation
 - Créer un cocktail : Décrivez votre cocktail idéal sur la page d'accueil
@@ -103,9 +114,30 @@ Les variables d'environnement sont configurées dans docker-compose.yml :
 - L'application fonctionne sans GPU (mode CPU)
 
 ## Dépannage
-- Erreur 404 sur les styles : Normal, Bootstrap est chargé via CDN
-- Génération lente : Premier appel plus long (téléchargement du modèle)
-- Problème de connexion Ollama : Vérifier avec /api/responses/test
+
+### Problèmes courants :
+
+**🔄 Premier démarrage lent**
+- Le modèle llama3.2 (~2GB) se télécharge automatiquement
+- Attendez que les logs affichent `"llama runner started"`
+
+**🔗 Erreur de connexion Ollama**
+- Vérifiez : http://localhost:5000/api/responses/test
+- Si échec, redémarrez : `docker-compose restart ollama`
+
+**🎨 Erreur 404 sur les styles**
+- Normal, Bootstrap est chargé via CDN
+- Vérifiez votre connexion internet
+
+**🐳 Téléchargement manuel du modèle**
+```bash
+# Si le téléchargement automatique échoue
+docker-compose exec ollama ollama pull llama3.2
+```
+
+**🗄️ Base de données vide**
+- La base SQLite se crée automatiquement
+- Vérifiez le dossier `instance/` local
 
 ## Développement
 
