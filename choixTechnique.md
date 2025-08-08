@@ -5,8 +5,7 @@
 ### Introduction
 
 Ce projet consiste en une application web de génération de cocktails personnalisés utilisant l'intelligence artificielle. L'objectif était de créer une solution simple, efficace et facilement déployable pour un contexte d'usage réel en bar.
-- **pas besoin de connexion internet** : l'app peut tourner sans connexion internet en standalone
-- **Aucune intrusion externe possible – Sécurité maximale garantie.**
+
 
 ## 1. Analyse du Besoin et Architecture Générale
 
