@@ -4,11 +4,13 @@ services:
   flask-app:
     build:
       context: .
-      dockerfile: dockerfile  # ← Pointer vers votre fichier en minuscules
+      dockerfile: Dockerfile  # ← Pointer vers Dockerfile avec majuscule
     ports:
       - "5000:5000"
+    volumes:
+      - ./instance:/app/instance  # Synchronise le dossier instance entre l'hôte et le conteneur
     environment:
-      - SQLALCHEMY_DATABASE_URI=sqlite:///bar_cocktails.db
+      - SQLALCHEMY_DATABASE_URI=sqlite:///instance/bar_cocktails.db
       - OLLAMA_URL=http://ollama:11434
       - SECRET_KEY=your-secret-key-here
     depends_on:

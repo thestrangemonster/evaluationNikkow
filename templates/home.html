@@ -20,7 +20,43 @@
                 <h1 class="display-4 mb-3">🍹 Le Mixologue Augmenté</h1>
                 <p class="lead">Créez des cocktails uniques grâce à l'intelligence artificielle</p>
             </div>
-            
+            <!-- Dernier cocktail créé -->
+            {% if last_cocktail %}
+            <div class="card mb-4 border-success">
+                <div class="card-header bg-success text-white">
+                    <h6 class="mb-0">
+                        <i class="fas fa-star"></i> Dernière création
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-success">
+                        <i class="fas fa-glass-martini-alt"></i> {{ last_cocktail.name_created }}
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong><i class="fas fa-list-ul"></i> Ingrédients :</strong></p>
+                            <p class="text-muted small">{{ last_cocktail.ingredients }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong><i class="fas fa-music"></i> Ambiance :</strong></p>
+                            <p class="text-muted small">{{ last_cocktail.sound_ambiance }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <p class="mb-1"><strong><i class="fas fa-book-open"></i> Histoire :</strong></p>
+                        <p class="text-muted small">{{ last_cocktail.story_describe[:150] }}{% if last_cocktail.story_describe|length > 150 %}...{% endif %}</p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <small class="text-muted">
+                            <i class="fas fa-hashtag"></i> Cocktail #{{ last_cocktail.id }}
+                        </small>
+                        <a href="{{ url_for('cocktails.show_cocktails') }}" class="btn btn-outline-success btn-sm">
+                            <i class="fas fa-eye"></i> Voir tous mes cocktails
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}            
             <!-- Formulaire de génération -->
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">

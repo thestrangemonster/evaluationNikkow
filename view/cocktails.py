@@ -46,12 +46,23 @@ def show_cocktails():
 
 
 # Route pour supprimer via formulaire HTML
-@cocktails_bp.route('/cocktails/delete/<int:id>', methods=['POST'])
+@cocktails_bp.route('/cocktails/delete/<int:id>', methods=['POST', 'GET'])
 def delete_cocktail_form(id):
-    """Supprimer un cocktail via formulaire HTML"""
+    """Supprimer un cocktail via formulaire HTML ou lien direct"""
+    print(f"🗑️ Tentative de suppression du cocktail ID: {id}")
     cocktail = StockCocktails.query.get_or_404(id)
-    db.session.delete(cocktail)
-    db.session.commit()
+    print(f"🗑️ Cocktail trouvé: {cocktail.name_created}")
+    
+    try:
+        db.session.delete(cocktail)
+        db.session.commit()
+        print(f"✅ Cocktail {cocktail.name_created} supprimé avec succès!")
+        flash(f'Cocktail "{cocktail.name_created}" supprimé avec succès!', 'success')
+    except Exception as e:
+        print(f"❌ Erreur lors de la suppression: {e}")
+        db.session.rollback()
+        flash('Erreur lors de la suppression du cocktail.', 'error')
+    
     return redirect(url_for('cocktails.show_cocktails'))
 
 # API pour supprimer un cocktail (JSON)

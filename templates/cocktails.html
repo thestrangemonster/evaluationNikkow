@@ -53,15 +53,13 @@
                 </div>
                 
                 <div class="ms-3">
-                    <!-- Formulaire HTML pour la suppression -->
-                    <form method="POST" action="/cocktails/delete/{{ cocktail.id }}" style="display: inline;">
-                        <button type="submit" 
-                                class="btn btn-danger btn-sm" 
-                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer le cocktail {{ cocktail.name_created }} ?')"
-                                title="Supprimer ce cocktail">
-                            <i class="fas fa-trash"></i> Supprimer
-                        </button>
-                    </form>
+                    <!-- Solution simple : lien direct de suppression avec GET -->
+                    <a href="/cocktails/delete/{{ cocktail.id }}" 
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer le cocktail {{ cocktail.name_created }} ?')"
+                       title="Supprimer ce cocktail">
+                        <i class="fas fa-trash"></i> Supprimer
+                    </a>
                 </div>
             </div>
         </div>

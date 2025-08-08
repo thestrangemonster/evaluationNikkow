@@ -3,15 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 from view.main import main_bp
 from view.cocktails import cocktails_bp
 from view.responses import responses_bp
-from models import db
+from models import db, StockCocktails
 import os
 
 app = Flask(__name__)
 
 # Configuration de l'application pour Docker
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
-    'DATABASE_URL', 
-    'sqlite:///bar_cocktails.db')
+    'SQLALCHEMY_DATABASE_URI', 
+    'sqlite:///instance/bar_cocktails.db')
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your_secret_key')
