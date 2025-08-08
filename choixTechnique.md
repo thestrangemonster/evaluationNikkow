@@ -185,6 +185,7 @@ base.html (structure + navigation)
 - Architecture modulaire : Ajout de fonctionnalités facilité
 - API disponible : Intégration avec d'autres systèmes
 - Containerisation : Migration vers Kubernetes possible
+- remplacer le CDN de bootstrap par bootstrap local afin d'utiliser l'app sans connexion à internet pour une sécurité maximale
 
 ## Conclusion
 
